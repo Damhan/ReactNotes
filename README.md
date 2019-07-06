@@ -1,10 +1,10 @@
-Application to learn React & demonstrate skill.
+*Application to learn React & demonstrate skill.*
 
 
-*Application Requirements:*
+**Application Requirements:**
 - Add Notes to list of notes.
 - Cross out notes.
 - Delete notes.
 
-*Potential Requirements:*
+**Potential Requirements:**
 - Add categories?
