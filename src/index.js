@@ -27,7 +27,14 @@ class Notes extends React.Component {
     renderNote(i) {
         return (
             <div>
-                {this.props.notes}
+                {this.props.notes.map((item, index) => (
+                    <div class="noteAndDel">
+
+                        <NoteRow key={index} value={item} />
+                        <DeleteNoteBut />
+                        <br/>
+                    </div>
+                ))}
             </div>
 
         )
@@ -63,6 +70,8 @@ class InsertBar extends React.Component {
         const notes = this.props.notes.slice();
         notes.push(this.state.value);
         this.props.update(notes);
+        //TODO - figure out how to clear this input
+        //this.setState({value: ''});
         event.preventDefault();
     }
 
