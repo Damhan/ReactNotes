@@ -13,12 +13,22 @@ class NoteRow extends React.Component {
 }
 
 class DeleteNoteBut extends React.Component {
+    constructor(props) {
+        super(props)
+        this.delRow = this.delRow.bind(this)
+    }
     render() {
         return (
-            <button className="deletebut">
+            <button className="deletebut" onClick={this.delRow}>
                 Del
             </button>
         );
+    }
+
+    delRow() {
+        var notes = this.props.notes.slice();
+        notes.splice(this.props.ind,1);
+        this.props.update(notes);
     }
 }
 
@@ -31,7 +41,7 @@ class Notes extends React.Component {
                     <div class="noteAndDel">
 
                         <NoteRow key={index} value={item} />
-                        <DeleteNoteBut />
+                        <DeleteNoteBut update={this.props.update} notes={this.props.notes} ind={index}/>
                         <br/>
                     </div>
                 ))}
@@ -116,6 +126,7 @@ class NoteApplication extends React.Component {
                 <div class="NotesDiv">
                     <Notes 
                     notes={this.state.notes}
+                    update = {this.update}
                     />
                 </div>
             </div>
