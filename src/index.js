@@ -3,12 +3,31 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class NoteRow extends React.Component {
+    constructor(props) {
+        super(props)
+        this.strikeThrough = this.strikeThrough.bind(this)
+    }
+
     render() {
         return (
-            <b className="noteRow">
-                {this.props.value}
-            </b>
+            <div class="singleNoteDiv" style={{display:'inline'}} onClick = {this.strikeThrough}>
+                <p 
+                className="noteRow" 
+                style= {{display: 'inline' , textDecorationLine : this.props.value.isClicked ? 'line-through' : 'none'}}
+                
+                >
+                    {this.props.value.mesg}
+                </p>
+            </div>
+            
         );
+    }
+
+    strikeThrough() {
+        var notes = this.props.notes.slice();
+        var isClicked = notes[this.props.ind].isClicked;
+        notes[this.props.ind].isClicked = !isClicked;
+        this.props.update(notes);
     }
 }
 
@@ -34,13 +53,13 @@ class DeleteNoteBut extends React.Component {
 
 class Notes extends React.Component {
     
-    renderNote(i) {
+    renderNote() {
         return (
             <div>
                 {this.props.notes.map((item, index) => (
                     <div class="noteAndDel">
 
-                        <NoteRow key={index} value={item} />
+                        <NoteRow key={index} value={item} notes={this.props.notes} update={this.props.update} ind={index} />
                         <DeleteNoteBut update={this.props.update} notes={this.props.notes} ind={index}/>
                         <br/>
                     </div>
@@ -55,7 +74,7 @@ class Notes extends React.Component {
             <div>
                 <h2>Notes:</h2>
                 <div class="FullNote">
-                    {this.renderNote(1)}
+                    {this.renderNote()}
                 </div>
             </div>
         )
@@ -78,7 +97,7 @@ class InsertBar extends React.Component {
 
     handleSubmit(event) {
         const notes = this.props.notes.slice();
-        notes.push(this.state.value);
+        notes.push({mesg:this.state.value, isClicked:false});
         this.props.update(notes);
         //TODO - figure out how to clear this input
         //this.setState({value: ''});
