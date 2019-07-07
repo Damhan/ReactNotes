@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class NoteRow extends React.Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class DeleteNoteBut extends React.Component {
     }
     render() {
         return (
-            <button className="deletebut" onClick={this.delRow}>
+            <button style={{float:'right'}} className="deletebut" onClick={this.delRow}>
                 Del
             </button>
         );
@@ -56,14 +57,20 @@ class Notes extends React.Component {
     renderNote() {
         return (
             <div>
-                {this.props.notes.map((item, index) => (
-                    <div class="noteAndDel">
-
-                        <NoteRow key={index} value={item} notes={this.props.notes} update={this.props.update} ind={index} />
-                        <DeleteNoteBut update={this.props.update} notes={this.props.notes} ind={index}/>
-                        <br/>
-                    </div>
-                ))}
+                <ul class="list-group ">
+                    {this.props.notes.map((item, index) => (
+                        
+                        <div class="container">
+                            <li class="list-group-item" style={{display:'inline'}}>
+                                <NoteRow key={index} value={item} notes={this.props.notes} update={this.props.update} ind={index} />
+                                <DeleteNoteBut class="pull-right" update={this.props.update} notes={this.props.notes} ind={index}/>
+                            </li>
+                            <br/>
+                            <br/>
+                        </div>
+                        
+                    ))}
+                </ul>
             </div>
 
         )
@@ -71,7 +78,7 @@ class Notes extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="container">
                 <h2>Notes:</h2>
                 <div class="FullNote">
                     {this.renderNote()}
@@ -108,7 +115,7 @@ class InsertBar extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}> 
-                    <input class="noteInsertBar" type="text" name="" onChange={this.handleChange}/>
+                    <input maxlength="120"class="noteInsertBar" type="text" name="" onChange={this.handleChange}/>
                     <input class="insertBut" type="submit" value="Add Note"/>
                 </form>
             </div>
@@ -135,14 +142,14 @@ class NoteApplication extends React.Component {
     render() {
         return (
             <div>
-                <h1>React Notes</h1>
-                <div class="InsertBarDiv">
+                <h1 class="jumbotron text-center">React Notes</h1>
+                <div class="container text-center">
                     <InsertBar 
                     notes={this.state.notes}
                     update = {this.update}
                     />   
                 </div>
-                <div class="NotesDiv">
+                <div class="container">
                     <Notes 
                     notes={this.state.notes}
                     update = {this.update}
