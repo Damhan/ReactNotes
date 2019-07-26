@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import {Provider} from 'react-redux';
+import store from './store';
+ 
 class NoteRow extends React.Component {
     constructor(props) {
         super(props)
