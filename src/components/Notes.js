@@ -1,19 +1,32 @@
 import React from 'react';
 import NoteRow from './NoteRow';
-import DeleteNoteBut from './DeleteNoteButton';
+import { connect } from 'react-redux';
+import {getNotes, delNote} from './../actions/noteActions';
+import PropTypes from 'prop-types';
+
 
 class Notes extends React.Component {
     
+
+    componentDidMount() {
+        this.props.getNotes();
+    }
+
+    delClick = (id) => {
+        this.props.delNote(id)
+    }
+
     renderNote() {
+        const {notes} = this.props.noteR;
         return (
             <div>
                 <ul class="list-group ">
-                    {this.props.notes.map((item, index) => (
+                    {notes.map((item, index) => (
                         
                         <div class="container">
                             <li class="list-group-item" style={{display:'inline'}}>
-                                <NoteRow key={index} value={item} notes={this.props.notes} update={this.props.update} ind={index} />
-                                <DeleteNoteBut class="pull-right" update={this.props.update} notes={this.props.notes} ind={index}/>
+                                <NoteRow key={index} value={item} notes={notes} update={this.props.update} ind={index} />
+                                <button style={{float:'right'}} className="deletebut" onClick={this.delClick.bind(this,item.id)}>Del</button>
                             </li>
                             <br/>
                             <br/>
@@ -38,4 +51,24 @@ class Notes extends React.Component {
     }
 }
 
-export default Notes;
+//
+Notes.propTypes = {
+    getNotes: PropTypes.func.isRequired,
+    noteR: PropTypes.object.isRequired
+}
+
+
+//@params1
+//our state
+const mapStateToProps = (state) => ({
+    //We called our reducer noteR back in our noteReducer
+    noteR: state.noteR
+});
+
+//connect
+//@params1
+//-Maps our state from the redux store to the components properties so we can
+// access it.
+//@params2
+//An object containing each of the desired actions.
+export default connect(mapStateToProps, {getNotes, delNote})(Notes);
