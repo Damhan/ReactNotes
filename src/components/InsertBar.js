@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {addNote} from './../actions/noteActions';
 import PropTypes from 'prop-types';
+import uuid from 'uuid';
 
 class InsertBar extends React.Component {
 
@@ -18,7 +19,7 @@ class InsertBar extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.addNote({mesg:this.state.value, isClicked:false});
+        this.props.addNote({id: uuid(), mesg:this.state.value, isClicked:false});
         //TODO - figure out how to clear this input
         //this.setState({value: ''});
         event.preventDefault();
