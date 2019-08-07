@@ -18,4 +18,12 @@ export const delNote = (id) => {
     }
 }
 
-export default getNotes;
+//Export delNote
+//Send action type with it
+//Send the note through our payload to reducer
+export const addNote = (note) => {
+    return {
+        type: ADD_NOTE,
+        payload:note
+    }
+}

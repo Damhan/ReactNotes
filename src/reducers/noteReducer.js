@@ -25,6 +25,14 @@ export default function(state=initialState, action) {
                 ...state,
                 notes: state.notes.filter(note => note.id !== action.payload)
             }
+        //CASE FOR WHEN ACTION IS ADD_NOTE
+        //Return our state with spread operator
+        //Set notes to notes with new note pushed.
+        case ADD_NOTE:
+            return {
+                ...state,
+                notes: [action.payload, ...state.notes]
+            }
         default:
             return state;
     }

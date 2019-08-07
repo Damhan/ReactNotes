@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {addNote} from './../actions/noteActions';
+import PropTypes from 'prop-types';
 
 class InsertBar extends React.Component {
 
@@ -15,9 +18,7 @@ class InsertBar extends React.Component {
     }
 
     handleSubmit(event) {
-        const notes = this.props.notes.slice();
-        notes.push({mesg:this.state.value, isClicked:false});
-        this.props.update(notes);
+        this.props.addNote({mesg:this.state.value, isClicked:false});
         //TODO - figure out how to clear this input
         //this.setState({value: ''});
         event.preventDefault();
@@ -36,4 +37,15 @@ class InsertBar extends React.Component {
     }
 }
 
-export default InsertBar;
+//
+InsertBar.propTypes = {
+    getNotes: PropTypes.func.isRequired,
+    noteR: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    //We called our reducer noteR back in our noteReducer
+    noteR: state.noteR
+});
+
+export default connect(mapStateToProps, {addNote})(InsertBar);
