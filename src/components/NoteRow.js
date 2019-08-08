@@ -15,7 +15,7 @@ class NoteRow extends React.Component {
 
     render() {
         return (
-            <div class="singleNoteDiv" style={{display:'inline'}} onClick = {this.strikeThrough}>
+            <div className="singleNoteDiv" style={{display:'inline'}} onClick = {this.strikeThrough}>
                 <p 
                 className="noteRow" 
                 style= {{display: 'inline' , textDecorationLine : this.props.value.isClicked ? 'line-through' : 'none'}}

@@ -20,11 +20,11 @@ class Notes extends React.Component {
         const {notes} = this.props.noteR;
         return (
             <div>
-                <ul class="list-group ">
+                <ul className="list-group ">
                     {notes.map((item, index) => (
                         
-                        <div class="container">
-                            <li class="list-group-item" style={{display:'inline'}}>
+                        <div className="container">
+                            <li className="list-group-item" style={{display:'inline'}}>
                                 <NoteRow key={index} value={item} notes={notes} update={this.props.update} ind={index} />
                                 <button style={{float:'right'}} className="deletebut" onClick={this.delClick.bind(this,item.id)}>Del</button>
                             </li>
@@ -41,9 +41,9 @@ class Notes extends React.Component {
 
     render() {
         return (
-            <div class="container">
+            <div className="container">
                 <h2>Notes:</h2>
-                <div class="FullNote">
+                <div className="FullNote">
                     {this.renderNote()}
                 </div>
             </div>

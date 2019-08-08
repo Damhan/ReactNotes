@@ -29,8 +29,8 @@ class InsertBar extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}> 
-                    <input maxlength="120"class="noteInsertBar" type="text" name="" onChange={this.handleChange}/>
-                    <input class="insertBut" type="submit" value="Add Note"/>
+                    <input maxlength="120"className="noteInsertBar" type="text" name="" onChange={this.handleChange}/>
+                    <input className="insertBut" type="submit" value="Add Note"/>
                 </form>
             </div>
 

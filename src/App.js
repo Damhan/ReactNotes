@@ -31,14 +31,14 @@ class App extends React.Component {
             //@Params store - our redux store file
             <Provider store={store}>
                 <div>
-                    <h1 class="jumbotron text-center">React Notes</h1>
-                    <div class="container text-center">
+                    <h1 className="jumbotron text-center">React Notes</h1>
+                    <div className="container text-center">
                         <InsertBar 
                         notes={this.state.notes}
                         update = {this.update}
                         />   
                     </div>
-                    <div class="container">
+                    <div className="container">
                         <Notes 
                         notes={this.state.notes}
                         update = {this.update}
